@@ -10,6 +10,17 @@ namespace Luxko.Logging
         public StackTracePanel stackTracePanel;
         public GameObject LogItemTemplate;
 
+        [Space(20)]
+        public Color InfoBg = new Color(1, 1, 1, 0.145f);
+        public Color InfoFg = new Color(0.19f, 0.19f, 0.19f, 1f);
+        [Space(10)]
+        public Color WarningBg = new Color(1, 1, 0, 0.145f);
+        public Color WarningFg = new Color(0.19f, 0.19f, 0.19f, 1f);
+        [Space(10)]
+        public Color ErrorBg = new Color(1, 0, 0, 0.145f);
+        public Color ErrorFg = new Color(0.19f, 0.19f, 0.19f, 1f);
+
+
         Queue<LogItem> logs = new Queue<LogItem>();
 
         void OnEnable()
@@ -30,6 +41,18 @@ namespace Luxko.Logging
             // TODO: construct (or reuse) LogItemHolder from template
             var holder = Instantiate(LogItemTemplate, ItemsPanel).GetComponent<LogItemHolder>();
             holder.item = log;
+            switch (t)
+            {
+                case LogType.Log:
+                    holder.SetColors(InfoBg, InfoFg);
+                    break;
+                case LogType.Warning:
+                    holder.SetColors(WarningBg, WarningFg);
+                    break;
+                default:
+                    holder.SetColors(ErrorBg, ErrorFg);
+                    break;
+            }
             StartCoroutine(DisplayMessageNextFrame(holder));
             holder.stackTracePanel = stackTracePanel;
         }

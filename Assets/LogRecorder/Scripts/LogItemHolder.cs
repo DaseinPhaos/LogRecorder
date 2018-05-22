@@ -22,6 +22,12 @@ namespace Luxko.Logging
             initialPreferredHeight = layout.preferredHeight;
         }
 
+        public void SetColors(Color bg, Color fg)
+        {
+            messageDisplay.color = fg;
+            GetComponent<Image>().color = bg;
+        }
+
         [ContextMenu("Display Message")]
         public void DisplayMessage()
         {
