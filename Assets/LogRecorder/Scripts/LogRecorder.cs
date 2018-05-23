@@ -6,6 +6,7 @@ namespace Luxko.Logging
 {
     public class LogRecorder : MonoBehaviour
     {
+        public RectTransform HolderTransform;
         public Transform ItemsPanel;
         public StackTracePanel stackTracePanel;
         public GameObject LogItemTemplate;
@@ -53,12 +54,18 @@ namespace Luxko.Logging
                     holder.SetColors(ErrorBg, ErrorFg);
                     break;
             }
-            StartCoroutine(DisplayMessageNextFrame(holder));
+            float holderWidth = -1;
+            if (HolderTransform != null)
+            {
+                holderWidth = HolderTransform.sizeDelta.x;
+            }
+            StartCoroutine(DisplayMessageNextFrame(holder, holderWidth));
             holder.stackTracePanel = stackTracePanel;
         }
 
-        IEnumerator DisplayMessageNextFrame(LogItemHolder holder)
+        IEnumerator DisplayMessageNextFrame(LogItemHolder holder, float holderWidth)
         {
+            if (holderWidth > 0) holder.SetPreferredWidth(holderWidth);
             yield return null;
             yield return null;
             holder.DisplayMessage();

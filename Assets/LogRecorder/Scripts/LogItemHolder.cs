@@ -10,6 +10,7 @@ namespace Luxko.Logging
         public LogItem item;
         public Text messageDisplay;
         public StackTracePanel stackTracePanel;
+        public float WidthMargin = 2;
         float initialMsgHeight;
         float initialPreferredHeight;
         LayoutElement layout;
@@ -20,6 +21,11 @@ namespace Luxko.Logging
 
             layout = GetComponent<LayoutElement>();
             initialPreferredHeight = layout.preferredHeight;
+        }
+
+        public void SetPreferredWidth(float width)
+        {
+            layout.preferredWidth = width - WidthMargin;
         }
 
         public void SetColors(Color bg, Color fg)
