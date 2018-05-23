@@ -175,11 +175,6 @@ Transform:
   m_Father: {fileID: 1510239306}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &187968379 stripped
-RectTransform:
-  m_PrefabParentObject: {fileID: 224331696299984840, guid: 284f76e9bcb8ce040bb6a205ff569a8c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1467596988}
 --- !u!1 &400001127
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,7 +413,7 @@ Prefab:
     - target: {fileID: 224331696299984840, guid: 284f76e9bcb8ce040bb6a205ff569a8c,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 130.53
+      value: 124.265
       objectReference: {fileID: 0}
     - target: {fileID: 224331696299984840, guid: 284f76e9bcb8ce040bb6a205ff569a8c,
         type: 2}
@@ -428,7 +423,7 @@ Prefab:
     - target: {fileID: 224331696299984840, guid: 284f76e9bcb8ce040bb6a205ff569a8c,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 255.06
+      value: 242.53
       objectReference: {fileID: 0}
     - target: {fileID: 224331696299984840, guid: 284f76e9bcb8ce040bb6a205ff569a8c,
         type: 2}
@@ -448,7 +443,7 @@ Prefab:
     - target: {fileID: 224767017878253032, guid: 284f76e9bcb8ce040bb6a205ff569a8c,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 310.06
+      value: 303.79498
       objectReference: {fileID: 0}
     - target: {fileID: 224767017878253032, guid: 284f76e9bcb8ce040bb6a205ff569a8c,
         type: 2}
@@ -458,28 +453,13 @@ Prefab:
     - target: {fileID: 224767017878253032, guid: 284f76e9bcb8ce040bb6a205ff569a8c,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 112.53
       objectReference: {fileID: 0}
     - target: {fileID: 224767017878253032, guid: 284f76e9bcb8ce040bb6a205ff569a8c,
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114365536510610734, guid: 284f76e9bcb8ce040bb6a205ff569a8c,
-        type: 2}
-      propertyPath: m_FlexibleWidth
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114653923448804512, guid: 284f76e9bcb8ce040bb6a205ff569a8c,
-        type: 2}
-      propertyPath: m_FlexibleWidth
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114915902329675644, guid: 284f76e9bcb8ce040bb6a205ff569a8c,
-        type: 2}
-      propertyPath: HolderTransform
-      value: 
-      objectReference: {fileID: 187968379}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 284f76e9bcb8ce040bb6a205ff569a8c, type: 2}
   m_IsPrefabParent: 0

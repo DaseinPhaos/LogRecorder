@@ -57,8 +57,8 @@ GameObject:
   - component: {fileID: 224360918654186410}
   - component: {fileID: 222213944328763516}
   - component: {fileID: 114365998923594406}
-  - component: {fileID: 114981920053713274}
   - component: {fileID: 114487140590587728}
+  - component: {fileID: 114533702765001964}
   m_Layer: 5
   m_Name: logPanel
   m_TagString: Untagged
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_MinHeight: -1
   m_PreferredWidth: 230
   m_PreferredHeight: -1
-  m_FlexibleWidth: -1
+  m_FlexibleWidth: 0.5
   m_FlexibleHeight: 1
   m_LayoutPriority: 1
 --- !u!114 &114365998923594406
@@ -319,6 +319,17 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!114 &114533702765001964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1327624537950822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -146154839, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114647985045284296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -349,7 +360,7 @@ MonoBehaviour:
   m_MinHeight: -1
   m_PreferredWidth: 100
   m_PreferredHeight: -1
-  m_FlexibleWidth: 0.3
+  m_FlexibleWidth: 0.5
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
 --- !u!114 &114838788390694332
@@ -376,28 +387,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995ad05589863fd4fabcedc65004c528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HolderTransform: {fileID: 224331696299984840}
   ItemsPanel: {fileID: 224717698441426294}
   stackTracePanel: {fileID: 114647985045284296}
   LogItemTemplate: {fileID: 1017761174768346, guid: 197f2fb776d62c240b4ff528a120fdc6,
     type: 2}
+  MaximumLogCount: 32
   InfoBg: {r: 1, g: 1, b: 1, a: 0.145}
   InfoFg: {r: 0.19, g: 0.19, b: 0.19, a: 1}
   WarningBg: {r: 1, g: 1, b: 0, a: 0.145}
   WarningFg: {r: 0.19, g: 0.19, b: 0.19, a: 1}
   ErrorBg: {r: 1, g: 0, b: 0, a: 0.145}
   ErrorFg: {r: 0.19, g: 0.19, b: 0.19, a: 1}
---- !u!114 &114981920053713274
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1327624537950822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1200242548, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 1
 --- !u!222 &222120237093018348
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -63,9 +63,17 @@ namespace Luxko.Logging
         public string[] stackTrace;
         public LogType type;
 
-        public LogItem(string msg, string st, LogType t)
+        public LogItem(string msg, string st, LogType t, bool logTime)
         {
-            message = msg;
+            if (logTime)
+            {
+                var ts = System.TimeSpan.FromSeconds(Time.time);
+                message = string.Format("[{0}:{1:D2}.{2:D3}] {3}", ts.Minutes + ts.Hours * 60, ts.Seconds, ts.Milliseconds, msg);
+            }
+            else
+            {
+                message = msg;
+            }
 
             // stackTrace = st.TrimEnd().Replace("\n", "\n\nat ");
             stackTrace = st.Trim().Split('\n');
