@@ -24,6 +24,11 @@ namespace Luxko.Logging
         public Color ErrorBg = new Color(1, 0, 0, 0.145f);
         public Color ErrorFg = new Color(0.19f, 0.19f, 0.19f, 1f);
 
+        [Space(20)]
+        public bool LogInfo = true;
+        public bool LogWarning = true;
+        public bool LogError = true;
+
         List<LogItemHolder> logHolders = new List<LogItemHolder>();
         int holderHeadIndex = 0;
 
@@ -39,6 +44,13 @@ namespace Luxko.Logging
 
         void OnLogMessageReceived(string msg, string st, LogType t)
         {
+            switch (t)
+            {
+                case LogType.Log: if (!LogInfo) return; break;
+                case LogType.Warning: if (!LogWarning) return; break;
+                default: if (!LogError) return; break;
+            }
+
             var log = new LogItem(msg, st, t, LogTimeInMessage);
 
             LogItemHolder holder;
@@ -81,6 +93,25 @@ namespace Luxko.Logging
             yield return null;
             yield return null;
             holder.DisplayMessage();
+        }
+
+        public void ToggleLogInfo() { LogInfo = !LogInfo; }
+        public void ToggleLogWarning() { LogWarning = !LogWarning; }
+        public void ToggleLogError() { LogError = !LogError; }
+
+        public void SetLogInfo(bool b) { LogInfo = b; }
+        public void SetLogWarning(bool b) { LogWarning = b; }
+        public void SetLogError(bool b) { LogError = b; }
+
+        public void ClearAllLogs()
+        {
+            foreach (var holder in logHolders)
+            {
+                if (holder != null)
+                {
+                    Destroy(holder.gameObject);
+                }
+            }
         }
     }
 }
