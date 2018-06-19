@@ -31,10 +31,15 @@ namespace Luxko.Logging
 
         List<LogItemHolder> logHolders = new List<LogItemHolder>();
         int holderHeadIndex = 0;
+        UnityEngine.UI.ScrollRect _containerScrollRect;
 
         void OnEnable()
         {
             Application.logMessageReceived += OnLogMessageReceived;
+            if (HolderTransform != null)
+            {
+                _containerScrollRect = HolderTransform.GetComponent<UnityEngine.UI.ScrollRect>();
+            }
         }
 
         void OnDisable()
@@ -93,6 +98,10 @@ namespace Luxko.Logging
             yield return null;
             yield return null;
             holder.DisplayMessage();
+            if (_containerScrollRect != null)
+            {
+                _containerScrollRect.verticalNormalizedPosition = 0f;
+            }
         }
 
         public void ToggleLogInfo() { LogInfo = !LogInfo; }
