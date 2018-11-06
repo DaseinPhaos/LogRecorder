@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Luxko.Collections;
 
 namespace Luxko.Logging
 {
@@ -13,6 +14,7 @@ namespace Luxko.Logging
         public bool LogTimeInMessage = true;
 
         public int MaximumLogCount = 32;
+        public int MaximumLogHolderCount = 32;
 
         [Space(20)]
         public Color InfoBg = new Color(1, 1, 1, 0.145f);
@@ -29,12 +31,22 @@ namespace Luxko.Logging
         public bool LogWarning = true;
         public bool LogError = true;
 
-        List<LogItemHolder> logHolders = new List<LogItemHolder>();
-        int holderHeadIndex = 0;
+        RingBuffer<LogItemHolder> logHolders;
+        RingBuffer<LogItem> logItems;
         UnityEngine.UI.ScrollRect _containerScrollRect;
+
+        int holderHeadIndex = 0;
 
         void OnEnable()
         {
+            logHolders = new RingBuffer<LogItemHolder>(MaximumLogHolderCount);
+            for (int i = 0; i < MaximumLogHolderCount; ++i)
+            {
+                var holder = Instantiate(LogItemTemplate, ItemsPanel).GetComponent<LogItemHolder>();
+                holder.gameObject.SetActive(false);
+                logHolders.PushBack(holder);
+            }
+            logItems = new RingBuffer<LogItem>(MaximumLogCount);
             Application.logMessageReceived += OnLogMessageReceived;
             if (HolderTransform != null)
             {
@@ -49,29 +61,25 @@ namespace Luxko.Logging
 
         void OnLogMessageReceived(string msg, string st, LogType t)
         {
-            switch (t)
+            var log = new LogItem(msg, st, t, LogTimeInMessage);
+            logItems.PushBack(log);
+            DisplayLog(log);
+        }
+
+        void DisplayLog(LogItem log)
+        {
+            switch (log.type)
             {
                 case LogType.Log: if (!LogInfo) return; break;
                 case LogType.Warning: if (!LogWarning) return; break;
                 default: if (!LogError) return; break;
             }
-
-            var log = new LogItem(msg, st, t, LogTimeInMessage);
-
-            LogItemHolder holder;
-            if (logHolders.Count >= MaximumLogCount)
-            {
-                holder = logHolders[holderHeadIndex];
-                holder.transform.SetAsLastSibling();
-                holderHeadIndex = (holderHeadIndex + 1) % logHolders.Count;
-            }
-            else
-            {
-                holder = Instantiate(LogItemTemplate, ItemsPanel).GetComponent<LogItemHolder>();
-                logHolders.Add(holder);
-            }
+            LogItemHolder holder = logHolders[holderHeadIndex];
+            holder.gameObject.SetActive(true);
+            holder.transform.SetAsLastSibling();
+            holderHeadIndex = (holderHeadIndex + 1) % logHolders.Count;
             holder.item = log;
-            switch (t)
+            switch (log.type)
             {
                 case LogType.Log:
                     holder.SetColors(InfoBg, InfoFg);
@@ -104,22 +112,32 @@ namespace Luxko.Logging
             }
         }
 
-        public void ToggleLogInfo() { LogInfo = !LogInfo; }
-        public void ToggleLogWarning() { LogWarning = !LogWarning; }
-        public void ToggleLogError() { LogError = !LogError; }
+        public void ToggleLogInfo() { LogInfo = !LogInfo; RefreshLogDisplay(); }
+        public void ToggleLogWarning() { LogWarning = !LogWarning; RefreshLogDisplay(); }
+        public void ToggleLogError() { LogError = !LogError; RefreshLogDisplay(); }
 
-        public void SetLogInfo(bool b) { LogInfo = b; }
-        public void SetLogWarning(bool b) { LogWarning = b; }
-        public void SetLogError(bool b) { LogError = b; }
 
         public void ClearAllLogs()
         {
+            ClearDisplay();
+            logItems.Clear();
+        }
+
+        void ClearDisplay()
+        {
             foreach (var holder in logHolders)
             {
-                if (holder != null)
-                {
-                    Destroy(holder.gameObject);
-                }
+                holder.gameObject.SetActive(false);
+            }
+            holderHeadIndex = 0;
+        }
+
+        void RefreshLogDisplay()
+        {
+            ClearDisplay();
+            foreach (var item in logItems)
+            {
+                DisplayLog(item);
             }
         }
     }

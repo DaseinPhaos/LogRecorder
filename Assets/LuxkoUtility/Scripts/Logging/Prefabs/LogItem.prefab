@@ -121,7 +121,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 12
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -130,7 +130,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 'Info: a log'
 --- !u!114 &114240526143772764
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_MinWidth: -1
   m_MinHeight: -1
   m_PreferredWidth: 230
-  m_PreferredHeight: 18
+  m_PreferredHeight: 20
   m_FlexibleWidth: 1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -208,6 +208,7 @@ MonoBehaviour:
     type: 0
   messageDisplay: {fileID: 114184654002522512}
   stackTracePanel: {fileID: 0}
+  WidthMargin: 2
 --- !u!222 &222106748044031706
 CanvasRenderer:
   m_ObjectHideFlags: 1
